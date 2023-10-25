@@ -1,13 +1,10 @@
 package pro.sky.collections.listssets;
 
-import java.util.Collection;
-
 public interface EmployeeService {
-    Employee add(String name, String surname);
 
-    Employee remove(String name, String surname);
+    String add(Employee employee);
 
-    Employee find(String name, String surname);
+    String remove(String fullName);
 
-    Collection<Employee> findAll();
+    String find(String fullName);
 }
