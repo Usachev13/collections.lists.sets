@@ -31,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String add(Employee employee) {
         if (employees.containsKey(employee.getFullName())){
-            throw new RuntimeException("Такой человек уже есть");
+            throw new RuntimeException("УЖе есть такой человек");
         }
         employees.put(employee.getFullName(), employee);
 
@@ -45,11 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             throw new RuntimeException("Человек не найден");
         }
         employees.remove(employee.getFullName(), employee);
-        return " "
-                + employee.getName() + " "
-                + employee.getSurname() + " "
-                + employee.getDepartment() + " "
-                + employee.getSalary() + " ";
+        return "Человек удален";
     }
     public String find(String fullName) {
         final Employee employee = employees.get(fullName);
