@@ -59,4 +59,13 @@ public class EmployeeServiceImpl implements EmployeeService {
                 + employee.getDepartment() + " "
                 + employee.getSalary() + " ";
     }
+
+    @Override
+    public Map<String, Employee> getMap() {
+        return employees;
+    }
+
+    public Collection<Employee> findAll(){
+        return Collections.unmodifiableCollection(employees.values());
+    }
 }

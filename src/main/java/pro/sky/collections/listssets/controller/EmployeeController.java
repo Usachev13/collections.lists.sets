@@ -21,8 +21,7 @@ public class EmployeeController {
             @RequestParam("name") String name,
             @RequestParam("surname") String surname,
             @RequestParam("department") int department,
-            @RequestParam("salary") int salary,
-            @RequestParam("fullName") String fullName
+            @RequestParam("salary") int salary
 
 
     ) {
