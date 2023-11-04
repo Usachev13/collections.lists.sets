@@ -1,4 +1,6 @@
-package pro.sky.collections.listssets;
+package pro.sky.collections.listssets.service;
+
+import pro.sky.collections.listssets.model.Employee;
 
 public interface EmployeeService {
 

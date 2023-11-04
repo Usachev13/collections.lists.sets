@@ -1,4 +1,4 @@
-package pro.sky.collections.listssets;
+package pro.sky.collections.listssets.model;
 
 import java.util.Objects;
 
@@ -7,38 +7,24 @@ public class Employee {
     private String surname;
     private int department;
     private int salary;
-    private String fullName;
 
-    public Employee(String name, String surname, int department, int salary, String fullName) {
+    public Employee(String name, String surname, int department, int salary) {
         this.name = name;
         this.surname = surname;
         this.department = department;
         this.salary = salary;
-        this.fullName = fullName;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public int getDepartment() {
         return department;
-    }
-
-    public void setDepartment(int department) {
-        this.department = department;
     }
 
     public int getSalary() {
@@ -50,11 +36,7 @@ public class Employee {
     }
 
     public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+        return name + " " + surname;
     }
 
     @Override
@@ -62,12 +44,12 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return department == employee.department && salary == employee.salary && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname) && Objects.equals(fullName, employee.fullName);
+        return department == employee.department && salary == employee.salary && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, department, salary, fullName);
+        return Objects.hash(name, surname, department, salary);
     }
 
     @Override
@@ -77,7 +59,6 @@ public class Employee {
                 ", surname='" + surname + '\'' +
                 ", department=" + department +
                 ", salary=" + salary +
-                ", fullName='" + fullName + '\'' +
                 '}';
     }
 }
