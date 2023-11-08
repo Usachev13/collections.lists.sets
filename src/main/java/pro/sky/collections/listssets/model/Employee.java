@@ -31,10 +31,6 @@ public class Employee {
         return salary;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
     public String getFullName() {
         return name + " " + surname;
     }

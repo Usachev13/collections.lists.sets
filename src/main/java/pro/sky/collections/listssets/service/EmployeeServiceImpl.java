@@ -1,13 +1,15 @@
 package pro.sky.collections.listssets.service;
 
 import org.springframework.stereotype.Service;
+import pro.sky.collections.listssets.exception.EmployeesAlredyAddedException;
+import pro.sky.collections.listssets.exception.EmployeesNotFoundException;
 import pro.sky.collections.listssets.model.Employee;
 
 import java.util.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    Map<String, Employee> employees = new HashMap<>(Map.of(
+    private final Map<String, Employee> employees = new HashMap<>(Map.of(
             "Александр Пушкин",
             new Employee("Александр", "Пушкин", 1, 60000),
             "Михаил Лермонтов",
@@ -30,28 +32,28 @@ public class EmployeeServiceImpl implements EmployeeService {
     );
 
     @Override
-    public String add(Employee employee) {
+    public Employee add(Employee employee) {
         if (employees.containsKey(employee.getFullName())){
-            throw new RuntimeException("УЖе есть такой человек");
+            throw new EmployeesAlredyAddedException("УЖе есть такой человек");
         }
         employees.put(employee.getFullName(), employee);
 
-        return "Человек добавлен";
+        return employee;
     }
 
     @Override
-    public String remove(String fullName) {
+    public Employee remove(String fullName) {
         final Employee employee = employees.get(fullName);
         if (employee == null) {
-            throw new RuntimeException("Человек не найден");
+            throw new EmployeesNotFoundException("Человек не найден");
         }
         employees.remove(employee.getFullName(), employee);
-        return "Человек удален";
+        return employee;
     }
     public String find(String fullName) {
         final Employee employee = employees.get(fullName);
         if (employee == null){
-            throw new RuntimeException("Человек не найден");
+            throw new EmployeesNotFoundException("Человек не найден");
         }
         return " "
                 + employee.getName() + " "
