@@ -1,6 +1,10 @@
 package pro.sky.collections.listssets.model;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 public class Employee {
     private String name;
@@ -9,8 +13,8 @@ public class Employee {
     private int salary;
 
     public Employee(String name, String surname, int department, int salary) {
-        this.name = name;
-        this.surname = surname;
+        this.name = capitalize(name.toLowerCase());
+        this.surname = capitalize(surname.toLowerCase());
         this.department = department;
         this.salary = salary;
     }

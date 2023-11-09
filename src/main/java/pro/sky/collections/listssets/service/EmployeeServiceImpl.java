@@ -1,11 +1,15 @@
 package pro.sky.collections.listssets.service;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import pro.sky.collections.listssets.exception.EmployeeInvalidInputException;
 import pro.sky.collections.listssets.exception.EmployeesAlredyAddedException;
 import pro.sky.collections.listssets.exception.EmployeesNotFoundException;
 import pro.sky.collections.listssets.model.Employee;
 
 import java.util.*;
+
+import static org.apache.commons.lang3.StringUtils.*;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
@@ -31,8 +35,15 @@ public class EmployeeServiceImpl implements EmployeeService {
     )
     );
 
+    private void checkIsAlfa(String name, String surname){
+        if (!(isAlpha(surname)&& isAlpha(name))){
+            throw new EmployeeInvalidInputException("Не правильно введены данные");
+        }
+    }
+
     @Override
     public Employee add(Employee employee) {
+        checkIsAlfa(employee.getName(), employee.getSurname());
         if (employees.containsKey(employee.getFullName())){
             throw new EmployeesAlredyAddedException("УЖе есть такой человек");
         }
