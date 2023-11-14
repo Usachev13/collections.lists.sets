@@ -7,11 +7,11 @@ import java.util.Map;
 
 public interface EmployeeService {
 
-    Employee add(Employee employee);
+    Employee add(String name, String surname, int department, int salary);
 
-    Employee remove(String fullName);
+    Employee remove(String name, String surname);
 
-    String find(String fullName);
+    Employee find(String name, String surname);
 
     Map <String, Employee> getMap();
 

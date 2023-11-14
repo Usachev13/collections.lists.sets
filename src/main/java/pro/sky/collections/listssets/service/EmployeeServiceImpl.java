@@ -42,8 +42,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee add(Employee employee) {
-        checkIsAlfa(employee.getName(), employee.getSurname());
+    public Employee add(String name, String surname, int department, int salary) {
+        Employee employee = new Employee(name,surname,department,salary);
+        checkIsAlfa(name, surname);
         if (employees.containsKey(employee.getFullName())){
             throw new EmployeesAlredyAddedException("УЖе есть такой человек");
         }
@@ -53,24 +54,23 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee remove(String fullName) {
-        final Employee employee = employees.get(fullName);
-        if (employee == null) {
-            throw new EmployeesNotFoundException("Человек не найден");
+    public Employee remove(String name, String surname) {
+        checkIsAlfa(name, surname);
+        String key = getKey(name, surname);
+        if (employees.containsKey(key)) {
+            employees.remove(key);
+
         }
-        employees.remove(employee.getFullName(), employee);
-        return employee;
+        throw new EmployeesNotFoundException("Человек не найден");
     }
-    public String find(String fullName) {
-        final Employee employee = employees.get(fullName);
-        if (employee == null){
-            throw new EmployeesNotFoundException("Человек не найден");
+    public Employee find(String name, String surname) {
+        checkIsAlfa(name, surname);
+        String key = getKey(name, surname);
+        if (employees.containsKey(key)){
+            return employees.get(key);
         }
-        return " "
-                + employee.getName() + " "
-                + employee.getSurname() + " "
-                + employee.getDepartment() + " "
-                + employee.getSalary() + " ";
+        throw new EmployeesNotFoundException("Человек не найден");
+
     }
 
     @Override
@@ -80,5 +80,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     public Collection<Employee> findAll(){
         return Collections.unmodifiableCollection(employees.values());
+    }
+    public String getKey(String name, String surname){
+        return name + " " + surname;
     }
 }
