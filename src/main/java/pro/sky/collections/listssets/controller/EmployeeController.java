@@ -37,7 +37,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/find")
-    public String findEmployee(@RequestParam(
+    public Employee findEmployee(@RequestParam(
             "name")String name,
                                @RequestParam("surname") String surname
     ) {
